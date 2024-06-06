@@ -188,7 +188,7 @@ go get -u github.com/golang-jwt/jwt
 
 2）新建一个用户管理该数据库（区别于AutoTrans的系统/项目用户）；项目开发过程中一般会使用navicat等软件管理数据库而不是直接用命令行，其提供的可视化界面可以方便操作。新建用户后【选择数据库】，选择【添加权限】，如图1。也可直接向数据库管理人员询问数据库名、用户名称密码、ip等信息。
 
-![图1 新建数据库用户（区别于系统用户）](.\image\clip_image002.jpg)
+![图1 新建数据库用户（区别于系统用户）](https://github.com/LoftyCloud/autotrans/image/clip_image002.jpg)
 
 创建数据库后不需要手动新建数据库表格，使用gorm进行**迁移**时会自动创建。
 
@@ -226,7 +226,7 @@ https://gorm.io/zh_CN/docs/migration.html
 
 4）在main.go中调用数据库初始化函数，此时若数据库与表设计不一致会进行自动迁移，打开数据库后运行项目即可创建对应的表。自动创建的用户管理功能与数据管理功能的数据表关系如图2。
 
-![图2 gorm迁移创建的数据表](.\image\clip_image004.jpg)
+![图2 gorm迁移创建的数据表](https://github.com/LoftyCloud/autotrans/image/clip_image004.jpg)
 
 5、接口与错误处理（gin，gorm）
 
@@ -240,7 +240,7 @@ https://gorm.io/zh_CN/docs/migration.html
 
 6、功能测试：配置好路由接口后，重新启动项目，此时可用的接口如图3所示。
 
-![图3 配置的路由接口](.\image\clip_image006.jpg)
+![图3 配置的路由接口](https://github.com/LoftyCloud/autotrans/image/clip_image006.jpg)
 
 这里使用apipost软件（最常用的是postman软件和swagger包）进行接口测试，如接口测试文件所示。配置对应的方法和路径后（这里相当于模拟前端响应用户的操作向后端发送请求），【发送】响应，其中若包含了json数据需要注意数据的编写是否符合规范（在应用中由前端负责将数据打包成json格式）。
 
@@ -264,4 +264,4 @@ swag init
 
 3）token中间件：
 
-![image-20240605171706683](.\image\image-20240605171706683.png)
+![image-20240605171706683](https://github.com/LoftyCloud/autotrans/image/image-20240605171706683.png)
