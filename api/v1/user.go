@@ -1,9 +1,9 @@
 package v1
 
 import (
-	"fmt"
 	"autotrans/model"
 	"autotrans/utils/errmsg"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -11,7 +11,7 @@ import (
 )
 
 // user模型的【控制器接口】
-var code int  // 错误码
+var code int // 错误码
 
 // 添加用户
 func AddUser(c *gin.Context) {
@@ -22,9 +22,9 @@ func AddUser(c *gin.Context) {
 	// fmt.Println(data)
 	code = model.CheckUser(data.Username) // 检查用户是否存在
 	if code == errmsg.SUCCESS {
-		model.CreateUser(&data)  // 调用方法创建用户
+		model.CreateUser(&data) // 调用方法创建用户
 	}
-	c.JSON(http.StatusOK, gin.H{  // 向前端返回json消息
+	c.JSON(http.StatusOK, gin.H{ // 向前端返回json消息
 		"status":  code,
 		"data":    data,
 		"message": errmsg.GetErrMsg(code),
@@ -42,7 +42,7 @@ func GetUsers(c *gin.Context) {
 	if pageNum == 0 {
 		pageNum = -1
 	}
-	
+
 	data := model.GetUsers(pageSize, pageNum) // 调用方法
 	code = errmsg.SUCCESS
 	c.JSON(http.StatusOK, gin.H{
@@ -61,14 +61,14 @@ func EditUser(c *gin.Context) {
 	}
 
 	fmt.Println(data.Username)
-	code = model.CheckUser(data.Username)  // 检查修改后的用户名是否重复
+	code = model.CheckUser(data.Username) // 检查修改后的用户名是否重复
 	if code == errmsg.SUCCESS {
 		model.EditUser(id, &data)
 	}
 	if code == errmsg.ERROR_USERNAME_USED {
 		c.Abort()
 	}
-	
+
 	c.JSON(http.StatusOK, gin.H{
 		"status":  code,
 		"message": errmsg.GetErrMsg(code),
@@ -78,7 +78,7 @@ func EditUser(c *gin.Context) {
 // 删除用户
 func DelUser(c *gin.Context) {
 	id, _ := strconv.Atoi(c.Param("id"))
-	fmt.Println(id)
+	// fmt.Println(id)
 	code = model.DelUser(id)
 	c.JSON(http.StatusOK, gin.H{
 		"status":  code,

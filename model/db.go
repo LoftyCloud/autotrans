@@ -3,8 +3,8 @@
 package model
 
 import (
-	"fmt"
 	"autotrans/utils"
+	"fmt"
 	"os"
 	"time"
 
@@ -51,7 +51,7 @@ func InitDb() {
 	}
 
 	// 传入结构体地址，自动迁移 schema，保持 schema 是最新的。
-	db.AutoMigrate(&User{}, &EmptyBoxQuantity{}, &Point{}, &MaterialTransportRecord{})  // 自动迁移
+	db.AutoMigrate(&User{}, &Box{}, &Point{}, &MaterialTransportRecord{}) // 自动迁移
 
 	// 连接池设置
 	// SetMaxIdleConns sets the maximum number of connections in the idle connection pool.
@@ -64,5 +64,5 @@ func InitDb() {
 	sqlDB.SetMaxOpenConns(100)
 	// SetConnMaxLifetime sets the maximum amount of time a connection may be reused.
 	sqlDB.SetConnMaxLifetime(10 * time.Second)
-	
+
 }

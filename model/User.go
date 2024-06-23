@@ -1,9 +1,9 @@
 package model
 
 import (
+	"autotrans/utils/errmsg"
 	"encoding/base64"
 	"fmt"
-	"autotrans/utils/errmsg"
 	"log"
 
 	"golang.org/x/crypto/scrypt"
@@ -21,8 +21,8 @@ type User struct {
 	// 绑定json格式，方便与前端交互
 	Username string `gorm:"type:varchar(20);not null" json:"username"`
 	Password string `gorm:"type:varchar(20);not null" json:"password"`
-	Email string `gorm:"type:varchar(20);" json:"email"`
-	Role string `gorm:"varchar(20);not null" json:"role"`
+	Email    string `gorm:"type:varchar(20);" json:"email"`
+	Role     string `gorm:"varchar(20);not null" json:"role"`
 }
 
 // // 方法的具体实现,在接口处被调用,这里主要实现了对数据库的操作
@@ -95,6 +95,7 @@ func EditUser(id int, data *User) int {
 func DelUser(id int) int {
 	var user User
 	// 软删除
+
 	err = db.Where("id = ?", id).Delete(&user).Error
 	if err != nil {
 		// fmt.Println(err)
@@ -104,15 +105,15 @@ func DelUser(id int) int {
 }
 
 // 登录验证
-func CheckLogin(userName string, password string)int{
+func CheckLogin(userName string, password string) int {
 	var user User
-	db.Where("username=?",userName).First(&user)
+	db.Where("username=?", userName).First(&user)
 
 	// 用户不存在
-	if user.ID ==0{
+	if user.ID == 0 {
 		return errmsg.ERROR_USER_NOT_EXIST
 	}
-	if ScryptPw(password)!=user.Password{
+	if ScryptPw(password) != user.Password {
 		return errmsg.ERROR_PASSWORD_WRONG
 	}
 	// 可在此进行权限管理，如普通用户无法登录后台等功能，对user.Role进行判断
